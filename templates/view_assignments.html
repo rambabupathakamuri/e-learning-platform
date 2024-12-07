@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Assignments</title>
+</head>
+<body>
+    <h1>Assignments for Course</h1>
+    <ul>
+        {% for assignment in assignments %}
+            <li>
+                Student ID: {{ assignment.student_id }}<br>
+                Content: {{ assignment.content }}<br>
+                Grade: {{ assignment.grade or "Not Graded" }}<br>
+                <form method="POST" action="/grade_assignment/{{ assignment.id }}">
+                    <input type="text" name="grade" placeholder="Enter grade" required>
+                    <button type="submit">Submit Grade</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

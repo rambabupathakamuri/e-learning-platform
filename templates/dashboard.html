@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <h2>Your Role: {{ user.role }}</h2>
+
+    <h3>Notifications:</h3>
+    <ul>
+        {% for notification in notifications %}
+            <li>
+                {{ notification.message }}
+                <a href="/notifications">Mark as Read</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if user.role == 'student' %}
+        <a href="/view_courses">View Courses</a>
+        <a href="/view_submissions">View Submissions</a>
+    {% elif user.role == 'instructor' %}
+        <a href="/create_course">Create Course</a>
+        <a href="/view_courses">View Courses</a>
+        <a href="/grading_history">Grading History</a>
+    {% elif user.role == 'admin' %}
+        <a href="/manage_users">Manage Users</a>
+        <a href="/manage_courses">Manage Courses</a>
+    {% endif %}
+
+    <a href="/logout">Logout</a>
+</body>
+</html>

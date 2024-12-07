@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Submissions</title>
+</head>
+<body>
+    <h1>Your Submissions</h1>
+    <ul>
+        {% for assignment in assignments %}
+            <li>
+                Course ID: {{ assignment.course_id }}<br>
+                Content: {{ assignment.content }}<br>
+                Grade: {{ assignment.grade or "Not Graded" }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>
