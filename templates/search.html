@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+    <h1>Search</h1>
+    <form method="GET" action="/search_results">
+        <input type="text" name="query" placeholder="Enter search term" required>
+        <select name="category">
+            <option value="courses">Courses</option>
+            <option value="users">Users</option>
+            <option value="assignments">Assignments</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

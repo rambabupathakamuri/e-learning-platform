@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grading History</title>
+</head>
+<body>
+    <h1>Grading History</h1>
+    <ul>
+        {% for assignment in graded_assignments %}
+        <li>Course ID: {{ assignment.course_id }} | Assignment: {{ assignment.content }} | Grade: {{ assignment.grade }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

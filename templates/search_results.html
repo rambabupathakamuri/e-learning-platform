@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <ul>
+        {% if category == 'courses' %}
+            {% for course in results %}
+                <li>{{ course.name }}</li>
+            {% endfor %}
+        {% elif category == 'users' %}
+            {% for user in results %}
+                <li>{{ user.username }} ({{ user.role }})</li>
+            {% endfor %}
+        {% elif category == 'assignments' %}
+            {% for assignment in results %}
+                <li>{{ assignment.content }} - Grade: {{ assignment.grade or "Not Graded" }}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>
