@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Assignment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Submit Assignment</h1>
+        <nav>
+            <a href="{{ url_for('student_home') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <form action="{{ url_for('submit_assignment', assignment_id=assignment_id) }}" method="post">
+            <label for="content">Submission Content:</label>
+            <textarea id="content" name="content" required></textarea>
+
+            <button type="submit">Submit Assignment</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 E-Learning Platform. All rights reserved.</p>
+    </footer>
+</body>
+</html>

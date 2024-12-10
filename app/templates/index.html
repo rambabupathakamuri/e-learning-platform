@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - E-Learning Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>E-Learning Platform</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('main.index') }}" class="active">Home</a></li>
+                    <li><a href="{{ url_for('main.about') }}">About</a></li>
+                    {% if logged_in %}
+                        <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="#" id="login-btn">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        {% if logged_in %}
+            <section>
+                <h2>Welcome, {{ username }}!</h2>
+                <p>Access your courses, assignments, and learning resources from here.</p>
+                {% if session.role == 'student' %}
+                    <a href="{{ url_for('main.student_home') }}" class="btn">Go to Student Dashboard</a>
+                {% elif session.role == 'instructor' %}
+                    <a href="{{ url_for('main.instructor_dashboard') }}" class="btn">Go to Instructor Dashboard</a>
+                {% elif session.role == 'admin' %}
+                    <a href="{{ url_for('main.admin_dashboard') }}" class="btn">Go to Admin Dashboard</a>
+                {% endif %}
+            </section>
+        {% else %}
+            <section class="hero">
+                <h2>Welcome to the E-Learning Platform</h2>
+                <p>Your journey to knowledge starts here. Explore courses, learn new skills, and grow your career.</p>
+                <p>Please log in to access more features.</p>
+            </section>
+        {% endif %}
+        <section class="subjects">
+            <h2>Subjects We Offer</h2>
+            <ul>
+                <li>Python Programming</li>
+                <li>Web Development</li>
+                <li>Data Science</li>
+                <li>Machine Learning</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 E-Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <!-- Login Modal -->
+    {% if not logged_in %}
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Login</h2>
+            <form action="{{ url_for('main.login') }}" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{{ url_for('main.register') }}">Register here</a>.</p>
+        </div>
+    </div>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - E-Learning Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>About E-Learning Platform</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                    <li><a href="{{ url_for('main.about') }}" class="active">About</a></li>
+                    {% if logged_in %}
+                        <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="#" id="login-btn">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section>
+            <h2>About Us</h2>
+            <p>The E-Learning Platform is designed to make learning accessible and engaging for everyone. Whether you're a beginner or an expert, our courses are tailored to meet your needs.</p>
+            <p>We offer a wide range of courses from programming to data science, taught by industry experts. Our mission is to empower individuals to achieve their career goals through quality education.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 E-Learning Platform. All rights reserved.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
