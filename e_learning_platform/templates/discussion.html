@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Discussion{% endblock %}
+{% block content %}
+<h2>{{ discussion.title }}</h2>
+<p>Created by {{ discussion.user.username }}</p>
+
+<h3>Replies:</h3>
+{% if replies %}
+    <ul>
+        {% for reply in replies %}
+            <li>
+                <strong>{{ reply.user.username }}:</strong> {{ reply.content }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No replies yet.</p>
+{% endif %}
+
+<h3>Post a Reply:</h3>
+<form method="POST">
+    <textarea name="content" placeholder="Write your reply here..." required></textarea>
+    <button type="submit">Reply</button>
+</form>
+{% endblock %}

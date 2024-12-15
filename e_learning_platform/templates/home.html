@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Welcome to the E-Learning Platform!</h1>
+<p>Access courses, track progress, and engage in interactive learning.</p>
+<ul>
+    {% for course in courses %}
+        <li>{{ course.title }}: {{ course.description }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

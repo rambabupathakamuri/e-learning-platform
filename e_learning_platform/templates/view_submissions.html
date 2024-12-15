@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}View Submissions{% endblock %}
+{% block content %}
+<h2>Submissions for {{ assignment.title }}</h2>
+<p>{{ assignment.description }}</p>
+<p>Due Date: {{ assignment.due_date.strftime('%Y-%m-%d %H:%M') }}</p>
+
+{% if submissions %}
+    <ul>
+        {% for submission in submissions %}
+            <li>
+                <strong>Student:</strong> {{ submission.student.username }}<br>
+                <strong>Submission:</strong> {{ submission.content }}<br>
+                <strong>Submitted On:</strong> {{ submission.timestamp.strftime('%Y-%m-%d %H:%M') }}<br>
+                {% if submission.grade %}
+                    <strong>Grade:</strong> {{ submission.grade }}
+                {% else %}
+                    <form method="POST" action="{{ url_for('grade_submission', submission_id=submission.id) }}">
+                        <input type="text" name="grade" placeholder="Enter grade" required>
+                        <button type="submit">Submit Grade</button>
+                    </form>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No submissions for this assignment yet.</p>
+{% endif %}
+{% endblock %}

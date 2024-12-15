@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Grade Submission{% endblock %}
+{% block content %}
+<h2>Grade Submission</h2>
+<p>Submission: {{ submission.content }}</p>
+<form method="POST">
+    <input type="text" name="grade" placeholder="Enter Grade" required>
+    <button type="submit">Submit Grade</button>
+</form>
+{% endblock %}

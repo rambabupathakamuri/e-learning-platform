@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Submit Assignment{% endblock %}
+{% block content %}
+<h2>Submit Assignment: {{ assignment.title }}</h2>
+<p>{{ assignment.description }}</p>
+<p>Due Date: {{ assignment.due_date.strftime('%Y-%m-%d %H:%M') }}</p>
+
+<form method="POST">
+    <textarea name="content" placeholder="Write your submission here..." required></textarea>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

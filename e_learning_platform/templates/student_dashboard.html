@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ current_user.username }}</h2>
+
+<!-- Enrolled Courses Section -->
+<h3>Enrolled Courses:</h3>
+{% if enrolled_courses %}
+    <ul>
+        {% for course in enrolled_courses %}
+            <li>
+                <strong>{{ course.title }}</strong> - {{ course.description }}
+                <h4>Assignments:</h4>
+                {% if course.assignments %}
+                    <ul>
+                        {% for assignment in course.assignments %}
+                            <li>
+                                <strong>{{ assignment.title }}</strong> - Due: {{ assignment.due_date.strftime('%Y-%m-%d %H:%M') }}
+                                <a href="{{ url_for('submit_assignment', assignment_id=assignment.id) }}">Submit Assignment</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No assignments available for this course.</p>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You are not enrolled in any courses.</p>
+{% endif %}
+
+<!-- Available Courses Section -->
+<h3>Available Courses to Enroll:</h3>
+{% if available_courses %}
+    <ul>
+        {% for course in available_courses %}
+            <li>
+                <strong>{{ course.title }}</strong> - {{ course.description }}
+                <form method="POST" action="{{ url_for('enroll', course_id=course.id) }}">
+                    <button type="submit">Enroll</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No available courses to enroll at the moment.</p>
+{% endif %}
+{% endblock %}
+
+<h3>Discussions:</h3>
+{% if discussions %}
+    <ul>
+        {% for discussion in discussions %}
+            <li>
+                <strong>{{ discussion.title }}</strong> - Created by {{ discussion.user.username }}<br>
+                <a href="{{ url_for('reply', discussion_id=discussion.id) }}">View/Reply</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No discussions available for your enrolled courses.</p>
+{% endif %}
